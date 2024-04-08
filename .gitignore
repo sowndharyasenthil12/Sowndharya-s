@@ -1,0 +1,78 @@
+"ChatGPT 3.5
+
+Sign up
+Bus reservation system source code with python 
+ChatGPT
+Sure, here's a simple example of a bus reservation system implemented in Python:
+
+python
+Copy code
+class Bus:
+    def __init__(self, name, total_seats):
+        self.name = name
+        self.total_seats = total_seats
+        self.available_seats = total_seats
+        self.reserved_seats = []
+
+    def reserve_seat(self, passenger_name, num_seats):
+        if num_seats <= self.available_seats:
+            self.reserved_seats.append((passenger_name, num_seats))
+            self.available_seats -= num_seats
+            print(f"{num_seats} seat(s) reserved for {passenger_name} on bus {self.name}.")
+        else:
+            print("Not enough available seats.")
+
+    def display_seats(self):
+        print(f"Available seats on bus {self.name}: {self.available_seats}/{self.total_seats}")
+
+    def display_reserved_seats(self):
+        print(f"Reserved seats on bus {self.name}:")
+        for passenger, num_seats in self.reserved_seats:
+            print(f"{passenger}: {num_seats} seat(s)")
+
+
+class BusReservationSystem:
+    def __init__(self):
+        self.buses = {}
+
+    def add_bus(self, bus_name, total_seats):
+        if bus_name not in self.buses:
+            self.buses[bus_name] = Bus(bus_name, total_seats)
+            print(f"Bus {bus_name} added with {total_seats} seats.")
+        else:
+            print(f"Bus {bus_name} already exists.")
+
+    def reserve_seat(self, bus_name, passenger_name, num_seats):
+        if bus_name in self.buses:
+            self.buses[bus_name].reserve_seat(passenger_name, num_seats)
+        else:
+            print(f"Bus {bus_name} does not exist.")
+
+    def display_seats(self, bus_name):
+        if bus_name in self.buses:
+            self.buses[bus_name].display_seats()
+        else:
+            print(f"Bus {bus_name} does not exist.")
+
+    def display_reserved_seats(self, bus_name):
+        if bus_name in self.buses:
+            self.buses[bus_name].display_reserved_seats()
+        else:
+            print(f"Bus {bus_name} does not exist.")
+
+
+# Example usage:
+reservation_system = BusReservationSystem()
+
+reservation_system.add_bus("Bus A", 50)
+reservation_system.add_bus("Bus B", 40)
+
+reservation_system.reserve_seat("Bus A", "John", 2)
+reservation_system.reserve_seat("Bus A", "Alice", 3)
+reservation_system.reserve_seat("Bus B", "Bob", 5)
+
+reservation_system.display_seats("Bus A")
+reservation_system.display_seats("Bus B")
+
+reservation_system.display_reserved_seats("Bus A")
+reservation_system.display_reserved_seats("Bus B")"
